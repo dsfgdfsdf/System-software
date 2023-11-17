@@ -1,15 +1,23 @@
+// TrainDeparture.java
 package main.java.transport.Train;
+
+import java.util.UUID;
 
 public class TrainDeparture {
     private String day;
     private String time;
-    private String trainRoute;
-    private Train train; // Додайте поле для поїзда
+    private Train train;
+    private String ticketCode;
 
     public TrainDeparture(String day, String time) {
         this.day = day;
         this.time = time;
-        this.train = new Train(); // Ініціалізуємо поїзд при створенні відправлення
+        this.train = new Train();
+        this.ticketCode = generateTicketCode();
+    }
+
+    private String generateTicketCode() {
+        return UUID.randomUUID().toString().substring(0, 8);
     }
 
     public String getDay() {
@@ -20,15 +28,20 @@ public class TrainDeparture {
         return time;
     }
 
-    public String getTrainRoute() {
-        return trainRoute;
-    }
-
-    public void setTrainRoute(String trainRoute) {
-        this.trainRoute = trainRoute;
-    }
-
     public Train getTrain() {
         return train;
+    }
+
+    public String getTicketCode() {
+        return ticketCode;
+    }
+
+    // Додано методи для отримання та встановлення номера потяга
+    public int getTrainNumber() {
+        return train.getTrainNumber();
+    }
+
+    public void setTrainNumber(int trainNumber) {
+        train.setTrainNumber(trainNumber);
     }
 }

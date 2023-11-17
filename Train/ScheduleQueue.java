@@ -1,5 +1,6 @@
 package main.java.transport.Train;
 
+
 import java.time.LocalTime;
 import java.util.*;
 
@@ -24,6 +25,13 @@ public class ScheduleQueue {
             freeTimes.put(day, times);
         }
     }
+    public void displayUpdatedSchedule() {
+        System.out.println("Оновлений розклад:");
+        for (TrainDeparture departure : queue) {
+            System.out.println("День: " + departure.getDay() + ", Час: " + departure.getTime());
+        }
+        System.out.println();
+    }
 
     public boolean canEnqueue(TrainDeparture departure) {
         // Перевірка чи можна додати відправлення на обраний день та час
@@ -45,11 +53,11 @@ public class ScheduleQueue {
     }
 
     private void removeTimeFromFreeTimes(String day, String selectedTime) {
-        List<LocalTime> dayFreeTimes = freeTimes.get(day);
-        if (dayFreeTimes != null) {
-            dayFreeTimes.remove(LocalTime.parse(selectedTime));
-        }
+        List<LocalTime> dayFreeTimes = new ArrayList<>(freeTimes.get(day)); // Створюємо копію списку для можливості зміни
+        dayFreeTimes.remove(LocalTime.parse(selectedTime));
+        freeTimes.put(day, dayFreeTimes);
     }
+
 
     public List<LocalTime> getFreeTimesForDay(String day) {
         return freeTimes.getOrDefault(day, Collections.emptyList());

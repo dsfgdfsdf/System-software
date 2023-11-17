@@ -1,5 +1,5 @@
 package main.java.transport.Train;
-class PassengerCar {
+public class PassengerCar {
     private int carNumber;
     private int capacity;
 
